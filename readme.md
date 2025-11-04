@@ -129,7 +129,7 @@ Then pass them to the `SearchEngine` constructor.
 ## Documentation
 
 Docs are hosted on **Read the Docs**:
-👉 [https://localsearch.readthedocs.io](https://localsearch.readthedocs.io)
+👉 [https://localsearchpy.readthedocs.io](https://localsearchpy.readthedocs.io)
 
 To build docs locally:
 
