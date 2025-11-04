@@ -1,1 +1,1 @@
-from LocalSearch.backend.engine import SearchEngine
+from .backend.engine import SearchEngine
