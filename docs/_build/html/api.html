@@ -1,0 +1,1036 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; LocalSearch 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Advanced Usage / Custom Components" href="examples.html" />
+    <link rel="prev" title="Usage / Quickstart" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            LocalSearch
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage / Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#embeddings">Embeddings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder"><code class="docutils literal notranslate"><span class="pre">BaseEmbedder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder.dimension"><code class="docutils literal notranslate"><span class="pre">BaseEmbedder.dimension()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder.encode"><code class="docutils literal notranslate"><span class="pre">BaseEmbedder.encode()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.embeddings.SentenceTransformerEmbedder.SentenceTransformerEmbedder"><code class="docutils literal notranslate"><span class="pre">SentenceTransformerEmbedder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.embeddings.SentenceTransformerEmbedder.SentenceTransformerEmbedder.dimension"><code class="docutils literal notranslate"><span class="pre">SentenceTransformerEmbedder.dimension()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.embeddings.SentenceTransformerEmbedder.SentenceTransformerEmbedder.encode"><code class="docutils literal notranslate"><span class="pre">SentenceTransformerEmbedder.encode()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#llms">LLMs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.llms.BaseLLM.BaseLLM"><code class="docutils literal notranslate"><span class="pre">BaseLLM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.llms.BaseLLM.BaseLLM.generate"><code class="docutils literal notranslate"><span class="pre">BaseLLM.generate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.llms.GroqLLM.GroqLLM"><code class="docutils literal notranslate"><span class="pre">GroqLLM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.llms.GroqLLM.GroqLLM.generate"><code class="docutils literal notranslate"><span class="pre">GroqLLM.generate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#vector-stores">Vector Stores</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore"><code class="docutils literal notranslate"><span class="pre">BaseVectorStore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.add"><code class="docutils literal notranslate"><span class="pre">BaseVectorStore.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.dimension"><code class="docutils literal notranslate"><span class="pre">BaseVectorStore.dimension()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.get_all_ids"><code class="docutils literal notranslate"><span class="pre">BaseVectorStore.get_all_ids()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.load"><code class="docutils literal notranslate"><span class="pre">BaseVectorStore.load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.prepare_index"><code class="docutils literal notranslate"><span class="pre">BaseVectorStore.prepare_index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.remove_by_id"><code class="docutils literal notranslate"><span class="pre">BaseVectorStore.remove_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.save"><code class="docutils literal notranslate"><span class="pre">BaseVectorStore.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.search"><code class="docutils literal notranslate"><span class="pre">BaseVectorStore.search()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation"><code class="docutils literal notranslate"><span class="pre">IndexPreparation</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation.current_files"><code class="docutils literal notranslate"><span class="pre">IndexPreparation.current_files</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation.index"><code class="docutils literal notranslate"><span class="pre">IndexPreparation.index</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation.used_ids"><code class="docutils literal notranslate"><span class="pre">IndexPreparation.used_ids</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult"><code class="docutils literal notranslate"><span class="pre">SearchResult</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult.id"><code class="docutils literal notranslate"><span class="pre">SearchResult.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult.metadata"><code class="docutils literal notranslate"><span class="pre">SearchResult.metadata</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult.score"><code class="docutils literal notranslate"><span class="pre">SearchResult.score</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore"><code class="docutils literal notranslate"><span class="pre">FaissVectorStore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.add"><code class="docutils literal notranslate"><span class="pre">FaissVectorStore.add()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.dimension"><code class="docutils literal notranslate"><span class="pre">FaissVectorStore.dimension()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.get_all_ids"><code class="docutils literal notranslate"><span class="pre">FaissVectorStore.get_all_ids()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.load"><code class="docutils literal notranslate"><span class="pre">FaissVectorStore.load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.prepare_index"><code class="docutils literal notranslate"><span class="pre">FaissVectorStore.prepare_index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.remove_by_id"><code class="docutils literal notranslate"><span class="pre">FaissVectorStore.remove_by_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.save"><code class="docutils literal notranslate"><span class="pre">FaissVectorStore.save()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.search"><code class="docutils literal notranslate"><span class="pre">FaissVectorStore.search()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#metadata-stores">Metadata Stores</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore"><code class="docutils literal notranslate"><span class="pre">BaseMetadataStore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.get_file_info"><code class="docutils literal notranslate"><span class="pre">BaseMetadataStore.get_file_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.is_modified"><code class="docutils literal notranslate"><span class="pre">BaseMetadataStore.is_modified()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.load_chunk_mapping"><code class="docutils literal notranslate"><span class="pre">BaseMetadataStore.load_chunk_mapping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.load_metadata"><code class="docutils literal notranslate"><span class="pre">BaseMetadataStore.load_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.save_chunk_mapping"><code class="docutils literal notranslate"><span class="pre">BaseMetadataStore.save_chunk_mapping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.save_metadata"><code class="docutils literal notranslate"><span class="pre">BaseMetadataStore.save_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.update"><code class="docutils literal notranslate"><span class="pre">BaseMetadataStore.update()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping"><code class="docutils literal notranslate"><span class="pre">ChunkMapping</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.chunk_id"><code class="docutils literal notranslate"><span class="pre">ChunkMapping.chunk_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.end"><code class="docutils literal notranslate"><span class="pre">ChunkMapping.end</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.file_path"><code class="docutils literal notranslate"><span class="pre">ChunkMapping.file_path</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.start"><code class="docutils literal notranslate"><span class="pre">ChunkMapping.start</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata"><code class="docutils literal notranslate"><span class="pre">FileMetadata</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata.modified"><code class="docutils literal notranslate"><span class="pre">FileMetadata.modified</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata.size"><code class="docutils literal notranslate"><span class="pre">FileMetadata.size</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore"><code class="docutils literal notranslate"><span class="pre">JsonMetadataStore</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.get_file_info"><code class="docutils literal notranslate"><span class="pre">JsonMetadataStore.get_file_info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.is_modified"><code class="docutils literal notranslate"><span class="pre">JsonMetadataStore.is_modified()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.load_chunk_mapping"><code class="docutils literal notranslate"><span class="pre">JsonMetadataStore.load_chunk_mapping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.load_metadata"><code class="docutils literal notranslate"><span class="pre">JsonMetadataStore.load_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.save_chunk_mapping"><code class="docutils literal notranslate"><span class="pre">JsonMetadataStore.save_chunk_mapping()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.save_metadata"><code class="docutils literal notranslate"><span class="pre">JsonMetadataStore.save_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.update"><code class="docutils literal notranslate"><span class="pre">JsonMetadataStore.update()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#text-extractors">Text Extractors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor"><code class="docutils literal notranslate"><span class="pre">BaseTextExtractor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor.can_handle"><code class="docutils literal notranslate"><span class="pre">BaseTextExtractor.can_handle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor.extract_text"><code class="docutils literal notranslate"><span class="pre">BaseTextExtractor.extract_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor.split_text"><code class="docutils literal notranslate"><span class="pre">BaseTextExtractor.split_text()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor"><code class="docutils literal notranslate"><span class="pre">DefaultTextExtractor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.SUPPORTED_TYPES"><code class="docutils literal notranslate"><span class="pre">DefaultTextExtractor.SUPPORTED_TYPES</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.can_handle"><code class="docutils literal notranslate"><span class="pre">DefaultTextExtractor.can_handle()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.extract_text"><code class="docutils literal notranslate"><span class="pre">DefaultTextExtractor.extract_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.split_text"><code class="docutils literal notranslate"><span class="pre">DefaultTextExtractor.split_text()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#engine">Engine</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LocalSearch.backend.engine.SearchEngine"><code class="docutils literal notranslate"><span class="pre">SearchEngine</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.engine.SearchEngine.search"><code class="docutils literal notranslate"><span class="pre">SearchEngine.search()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#LocalSearch.backend.engine.SearchEngine.web"><code class="docutils literal notranslate"><span class="pre">SearchEngine.web()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Advanced Usage / Custom Components</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">LocalSearch</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<section id="embeddings">
+<h2>Embeddings<a class="headerlink" href="#embeddings" title="Link to this heading"></a></h2>
+<p>This section contains classes for generating vector embeddings from documents.
+Users can extend <a class="reference internal" href="#module-LocalSearch.backend.embeddings.BaseEmbeddings" title="LocalSearch.backend.embeddings.BaseEmbeddings"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalSearch.backend.embeddings.BaseEmbeddings</span></code></a> to implement custom embedding strategies.</p>
+<dl class="py class" id="module-LocalSearch.backend.embeddings.BaseEmbeddings">
+<dt class="sig sig-object py" id="LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.embeddings.BaseEmbeddings.</span></span><span class="sig-name descname"><span class="pre">BaseEmbedder</span></span><a class="headerlink" href="#LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for any text embedding model.</p>
+<p>Subclasses must implement methods to encode text into vectors and
+report embedding dimensionality.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder.dimension">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dimension</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder.dimension" title="Link to this definition"></a></dt>
+<dd><p>Return the dimensionality of the embedding vectors produced by this model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Embedding dimension.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder.encode">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder.encode" title="Link to this definition"></a></dt>
+<dd><p>Convert a single text string into a vector embedding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – Input text to embed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resulting embedding vector (dtype=float32).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-LocalSearch.backend.embeddings.SentenceTransformerEmbedder">
+<dt class="sig sig-object py" id="LocalSearch.backend.embeddings.SentenceTransformerEmbedder.SentenceTransformerEmbedder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.embeddings.SentenceTransformerEmbedder.</span></span><span class="sig-name descname"><span class="pre">SentenceTransformerEmbedder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'all-MiniLM-L6-v2'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.embeddings.SentenceTransformerEmbedder.SentenceTransformerEmbedder" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder" title="LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseEmbedder</span></code></a></p>
+<p>Embedder using a Sentence-Transformers model.</p>
+<p>Default model: “all-MiniLM-L6-v2”</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.embeddings.SentenceTransformerEmbedder.SentenceTransformerEmbedder.dimension">
+<span class="sig-name descname"><span class="pre">dimension</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#LocalSearch.backend.embeddings.SentenceTransformerEmbedder.SentenceTransformerEmbedder.dimension" title="Link to this definition"></a></dt>
+<dd><p>Return the dimensionality of the embedding vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Embedding dimension.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.embeddings.SentenceTransformerEmbedder.SentenceTransformerEmbedder.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#LocalSearch.backend.embeddings.SentenceTransformerEmbedder.SentenceTransformerEmbedder.encode" title="Link to this definition"></a></dt>
+<dd><p>Encode a text string into a vector embedding.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – Input string to encode.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Embedding vector as float32 array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="llms">
+<h2>LLMs<a class="headerlink" href="#llms" title="Link to this heading"></a></h2>
+<p>This section contains classes for interacting with Large Language Models (LLMs).
+Users can subclass <a class="reference internal" href="#module-LocalSearch.backend.llms.BaseLLM" title="LocalSearch.backend.llms.BaseLLM"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalSearch.backend.llms.BaseLLM</span></code></a> to provide custom LLM implementations.</p>
+<dl class="py class" id="module-LocalSearch.backend.llms.BaseLLM">
+<dt class="sig sig-object py" id="LocalSearch.backend.llms.BaseLLM.BaseLLM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.llms.BaseLLM.</span></span><span class="sig-name descname"><span class="pre">BaseLLM</span></span><a class="headerlink" href="#LocalSearch.backend.llms.BaseLLM.BaseLLM" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for any LLM (Large Language Model) integration.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.llms.BaseLLM.BaseLLM.generate">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#LocalSearch.backend.llms.BaseLLM.BaseLLM.generate" title="Link to this definition"></a></dt>
+<dd><p>Generate text from a prompt using the underlying LLM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prompt</strong> – Input prompt string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Generated text as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-LocalSearch.backend.llms.GroqLLM">
+<dt class="sig sig-object py" id="LocalSearch.backend.llms.GroqLLM.GroqLLM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.llms.GroqLLM.</span></span><span class="sig-name descname"><span class="pre">GroqLLM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'openai/gpt-oss-120b'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.llms.GroqLLM.GroqLLM" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LocalSearch.backend.llms.BaseLLM.BaseLLM" title="LocalSearch.backend.llms.BaseLLM.BaseLLM"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseLLM</span></code></a></p>
+<p>Groq LLM client wrapper.</p>
+<p>Uses the Groq SDK to call a specified model and stream output.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.llms.GroqLLM.GroqLLM.generate">
+<span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#LocalSearch.backend.llms.GroqLLM.GroqLLM.generate" title="Link to this definition"></a></dt>
+<dd><p>Generate text for the given prompt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>prompt</strong> – Input string to generate a response for.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Generated text as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="vector-stores">
+<h2>Vector Stores<a class="headerlink" href="#vector-stores" title="Link to this heading"></a></h2>
+<p>This section contains classes for storing and querying document vectors.
+Users can implement <a class="reference internal" href="#module-LocalSearch.backend.vector_store.BaseVectorStore" title="LocalSearch.backend.vector_store.BaseVectorStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalSearch.backend.vector_store.BaseVectorStore</span></code></a> to define a custom vector storage backend.</p>
+<dl class="py class" id="module-LocalSearch.backend.vector_store.BaseVectorStore">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.vector_store.BaseVectorStore.</span></span><span class="sig-name descname"><span class="pre">BaseVectorStore</span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for any vector store.</p>
+<p>Any implementation must provide all of the following methods to be compatible
+with _process_files and other utilities.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.add">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vectors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.add" title="Link to this definition"></a></dt>
+<dd><p>Add vectors with corresponding IDs and associated metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vectors</strong> (<em>np.ndarray</em>) – 2D array of vectors to add.</p></li>
+<li><p><strong>ids</strong> (<em>np.ndarray</em>) – 1D array of unique IDs for each vector.</p></li>
+<li><p><strong>metadata</strong> (<em>List</em><em>[</em><em>dict</em><em>]</em>) – List of metadata dicts, one per vector.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.dimension">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dimension</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.dimension" title="Link to this definition"></a></dt>
+<dd><p>Return the dimensionality of vectors supported by this store.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Embedding vector dimensionality.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.get_all_ids">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.get_all_ids" title="Link to this definition"></a></dt>
+<dd><p>Return a set of all vector IDs currently stored.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>All IDs in the store.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Set[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.load">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.load" title="Link to this definition"></a></dt>
+<dd><p>Load the store from disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – File path or directory to load the store from.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.prepare_index">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prepare_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation" title="LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation"><span class="pre">IndexPreparation</span></a></span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.prepare_index" title="Link to this definition"></a></dt>
+<dd><p>Prepare or load the index from a directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory_path</strong> (<em>str</em>) – Directory containing files to index.</p></li>
+<li><p><strong>recursive</strong> (<em>bool</em>) – Whether to scan subdirectories.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Dict with keys:</dt><dd><ul class="simple">
+<li><p>’index’: internal index object</p></li>
+<li><p>’current_files’: set of files present in the directory</p></li>
+<li><p>’used_ids’: set of vector IDs already in the index</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation" title="LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation">IndexPreparation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.remove_by_id">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.remove_by_id" title="Link to this definition"></a></dt>
+<dd><p>Remove a vector from the store by its ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vector_id</strong> (<em>int</em>) – ID of the vector to remove.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.save">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.save" title="Link to this definition"></a></dt>
+<dd><p>Persist the store to disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – File path or directory to save the store.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.search">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult" title="LocalSearch.backend.vector_store.BaseVectorStore.SearchResult"><span class="pre">SearchResult</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore.search" title="Link to this definition"></a></dt>
+<dd><p>Return the top_k nearest neighbors for a query vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query_vector</strong> (<em>np.ndarray</em>) – Single query vector.</p></li>
+<li><p><strong>top_k</strong> (<em>int</em>) – Number of nearest neighbors to return.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of search results with keys ‘id’, ‘score’, ‘metadata’.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult" title="LocalSearch.backend.vector_store.BaseVectorStore.SearchResult">SearchResult</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.vector_store.BaseVectorStore.</span></span><span class="sig-name descname"><span class="pre">IndexPreparation</span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>TypedDict for the dictionary returned by prepare_index().
+Ensures a strict format for generic utilities.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation.current_files">
+<span class="sig-name descname"><span class="pre">current_files</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation.current_files" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation.index">
+<span class="sig-name descname"><span class="pre">index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">object</span></em><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation.index" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation.used_ids">
+<span class="sig-name descname"><span class="pre">used_ids</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation.used_ids" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.SearchResult">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.vector_store.BaseVectorStore.</span></span><span class="sig-name descname"><span class="pre">SearchResult</span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>TypedDict for a single search result returned by the vector store.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.SearchResult.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult.id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.SearchResult.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult.metadata" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.BaseVectorStore.SearchResult.score">
+<span class="sig-name descname"><span class="pre">score</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult.score" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-LocalSearch.backend.vector_store.FaissVectorStore">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.vector_store.FaissVectorStore.</span></span><span class="sig-name descname"><span class="pre">FaissVectorStore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore" title="LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseVectorStore</span></code></a></p>
+<p>FAISS-based vector store with optional metadata persistence.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vectors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ids</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.add" title="Link to this definition"></a></dt>
+<dd><p>Add vectors with IDs and optional metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vectors</strong> – Array of shape (n, dim)</p></li>
+<li><p><strong>ids</strong> – Array of integer IDs</p></li>
+<li><p><strong>metadata</strong> – Optional list of metadata dictionaries</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.dimension">
+<span class="sig-name descname"><span class="pre">dimension</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.dimension" title="Link to this definition"></a></dt>
+<dd><p>Return dimensionality of vectors in this store.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.get_all_ids">
+<span class="sig-name descname"><span class="pre">get_all_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.get_all_ids" title="Link to this definition"></a></dt>
+<dd><p>Return a set of all vector IDs currently stored.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.load" title="Link to this definition"></a></dt>
+<dd><p>Load FAISS index and associated metadata.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.prepare_index">
+<span class="sig-name descname"><span class="pre">prepare_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation" title="LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation"><span class="pre">IndexPreparation</span></a></span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.prepare_index" title="Link to this definition"></a></dt>
+<dd><p>Load existing index if available, else create a new one.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>directory_path</strong> – Directory to store/load index.</p></li>
+<li><p><strong>recursive</strong> – Whether to scan subdirectories.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Dict with keys:</dt><dd><ul class="simple">
+<li><p>index: FAISS index object</p></li>
+<li><p>current_files: set of valid files</p></li>
+<li><p>used_ids: set of IDs already in index</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation" title="LocalSearch.backend.vector_store.BaseVectorStore.IndexPreparation">IndexPreparation</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.remove_by_id">
+<span class="sig-name descname"><span class="pre">remove_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.remove_by_id" title="Link to this definition"></a></dt>
+<dd><p>Remove a vector by its ID and delete associated metadata.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.save" title="Link to this definition"></a></dt>
+<dd><p>Save FAISS index and metadata mapping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> – Optional path to save index (overrides self.index_path)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult" title="LocalSearch.backend.vector_store.BaseVectorStore.SearchResult"><span class="pre">SearchResult</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#LocalSearch.backend.vector_store.FaissVectorStore.FaissVectorStore.search" title="Link to this definition"></a></dt>
+<dd><p>Search for nearest neighbors of a query vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query_vector</strong> – Array of shape (1, dim)</p></li>
+<li><p><strong>top_k</strong> – Number of neighbors to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of dictionaries with keys ‘id’, ‘score’, ‘metadata’</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[<a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.SearchResult" title="LocalSearch.backend.vector_store.BaseVectorStore.SearchResult">SearchResult</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="metadata-stores">
+<h2>Metadata Stores<a class="headerlink" href="#metadata-stores" title="Link to this heading"></a></h2>
+<p>This section contains classes for storing metadata about documents and vector chunks.
+Users can subclass <a class="reference internal" href="#module-LocalSearch.backend.metadata_store.BaseMetaDataStore" title="LocalSearch.backend.metadata_store.BaseMetaDataStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalSearch.backend.metadata_store.BaseMetaDataStore</span></code></a> to implement custom metadata handling.</p>
+<dl class="py class" id="module-LocalSearch.backend.metadata_store.BaseMetaDataStore">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.metadata_store.BaseMetaDataStore.</span></span><span class="sig-name descname"><span class="pre">BaseMetadataStore</span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for metadata storage backends.</p>
+<p>Defines strict output formats for metadata and chunk mapping.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.get_file_info">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_file_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata" title="LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata"><span class="pre">FileMetadata</span></a></span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.get_file_info" title="Link to this definition"></a></dt>
+<dd><p>Get information about a specific file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – Path to the file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A FileMetadata dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.is_modified">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata" title="LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata"><span class="pre">FileMetadata</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.is_modified" title="Link to this definition"></a></dt>
+<dd><p>Determine if a file has changed compared to stored metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – Path to the file.</p></li>
+<li><p><strong>current_info</strong> – Current FileMetadata dictionary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the file is modified, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.load_chunk_mapping">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_chunk_mapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping" title="LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping"><span class="pre">ChunkMapping</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.load_chunk_mapping" title="Link to this definition"></a></dt>
+<dd><p>Load the chunk mapping list from persistent storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of ChunkMapping dictionaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.load_metadata">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata" title="LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata"><span class="pre">FileMetadata</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.load_metadata" title="Link to this definition"></a></dt>
+<dd><p>Load all metadata from persistent storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary mapping file paths to FileMetadata dictionaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.save_chunk_mapping">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_chunk_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chunk_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping" title="LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping"><span class="pre">ChunkMapping</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.save_chunk_mapping" title="Link to this definition"></a></dt>
+<dd><p>Save the chunk mapping list to persistent storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chunk_mapping</strong> – List of ChunkMapping dictionaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.save_metadata">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata" title="LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata"><span class="pre">FileMetadata</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.save_metadata" title="Link to this definition"></a></dt>
+<dd><p>Save metadata to persistent storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metadata</strong> – Dictionary mapping file paths to FileMetadata dictionaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.update">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata" title="LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata"><span class="pre">FileMetadata</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore.update" title="Link to this definition"></a></dt>
+<dd><p>Update metadata for a specific file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – Path to the file.</p></li>
+<li><p><strong>file_info</strong> – FileMetadata dictionary.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.metadata_store.BaseMetaDataStore.</span></span><span class="sig-name descname"><span class="pre">ChunkMapping</span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>Structure of a single chunk mapping.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.chunk_id">
+<span class="sig-name descname"><span class="pre">chunk_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.chunk_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.end">
+<span class="sig-name descname"><span class="pre">end</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.end" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.file_path">
+<span class="sig-name descname"><span class="pre">file_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.file_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.start">
+<span class="sig-name descname"><span class="pre">start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.ChunkMapping.start" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.metadata_store.BaseMetaDataStore.</span></span><span class="sig-name descname"><span class="pre">FileMetadata</span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>Structure of metadata stored for each file.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata.modified">
+<span class="sig-name descname"><span class="pre">modified</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata.modified" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata.size">
+<span class="sig-name descname"><span class="pre">size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.FileMetadata.size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-LocalSearch.backend.metadata_store.JsonMetadataStore">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.metadata_store.JsonMetadataStore.</span></span><span class="sig-name descname"><span class="pre">JsonMetadataStore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore" title="LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseMetadataStore</span></code></a></p>
+<p>JSON-based metadata and chunk mapping persistence.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.get_file_info">
+<span class="sig-name descname"><span class="pre">get_file_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.get_file_info" title="Link to this definition"></a></dt>
+<dd><p>Get information about a specific file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – Path to the file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A FileMetadata dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.is_modified">
+<span class="sig-name descname"><span class="pre">is_modified</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.is_modified" title="Link to this definition"></a></dt>
+<dd><p>Determine if a file has changed compared to stored metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – Path to the file.</p></li>
+<li><p><strong>current_info</strong> – Current FileMetadata dictionary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the file is modified, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.load_chunk_mapping">
+<span class="sig-name descname"><span class="pre">load_chunk_mapping</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.load_chunk_mapping" title="Link to this definition"></a></dt>
+<dd><p>Load the chunk mapping list from persistent storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of ChunkMapping dictionaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.load_metadata">
+<span class="sig-name descname"><span class="pre">load_metadata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.load_metadata" title="Link to this definition"></a></dt>
+<dd><p>Load all metadata from persistent storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary mapping file paths to FileMetadata dictionaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.save_chunk_mapping">
+<span class="sig-name descname"><span class="pre">save_chunk_mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chunk_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.save_chunk_mapping" title="Link to this definition"></a></dt>
+<dd><p>Save the chunk mapping list to persistent storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chunk_mapping</strong> – List of ChunkMapping dictionaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.save_metadata">
+<span class="sig-name descname"><span class="pre">save_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metadata</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.save_metadata" title="Link to this definition"></a></dt>
+<dd><p>Save metadata to persistent storage.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>metadata</strong> – Dictionary mapping file paths to FileMetadata dictionaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.metadata_store.JsonMetadataStore.JsonMetadataStore.update" title="Link to this definition"></a></dt>
+<dd><p>Update metadata for a specific file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – Path to the file.</p></li>
+<li><p><strong>file_info</strong> – FileMetadata dictionary.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="text-extractors">
+<h2>Text Extractors<a class="headerlink" href="#text-extractors" title="Link to this heading"></a></h2>
+<p>This section contains classes for extracting text from files.
+Users can implement <a class="reference internal" href="#module-LocalSearch.backend.text_extractor.BaseTextExtractor" title="LocalSearch.backend.text_extractor.BaseTextExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalSearch.backend.text_extractor.BaseTextExtractor</span></code></a> to define custom extraction strategies.</p>
+<dl class="py class" id="module-LocalSearch.backend.text_extractor.BaseTextExtractor">
+<dt class="sig sig-object py" id="LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.text_extractor.BaseTextExtractor.</span></span><span class="sig-name descname"><span class="pre">BaseTextExtractor</span></span><a class="headerlink" href="#LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for extracting text from documents.</p>
+<p>Subclasses must implement methods to determine if a file type is supported
+and to extract text from files.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor.can_handle">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">can_handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor.can_handle" title="Link to this definition"></a></dt>
+<dd><p>Determine if this extractor can handle the given file type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – Path to the file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if this extractor can process the file type, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor.extract_text">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extract_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor.extract_text" title="Link to this definition"></a></dt>
+<dd><p>Extract and return text from a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – Path to the file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Extracted text as a string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor.split_text">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">split_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor.split_text" title="Link to this definition"></a></dt>
+<dd><p>Split the input text into smaller chunks suitable for embedding.</p>
+<p>The exact chunking strategy (size, overlap, etc.) is implementation-dependent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em>) – The full text to split.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of text chunks.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-LocalSearch.backend.text_extractor.DefaultTextExtractor">
+<dt class="sig sig-object py" id="LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.text_extractor.DefaultTextExtractor.</span></span><span class="sig-name descname"><span class="pre">DefaultTextExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_overlap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor" title="LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseTextExtractor</span></code></a></p>
+<p>Default text extractor supporting .txt, .pdf, and .html files.</p>
+<p>Provides optional text chunking with overlap for downstream processing.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.SUPPORTED_TYPES">
+<span class="sig-name descname"><span class="pre">SUPPORTED_TYPES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['.txt',</span> <span class="pre">'.pdf',</span> <span class="pre">'.html']</span></em><a class="headerlink" href="#LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.SUPPORTED_TYPES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.can_handle">
+<span class="sig-name descname"><span class="pre">can_handle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.can_handle" title="Link to this definition"></a></dt>
+<dd><p>Check if the file extension is supported by this extractor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – Path to the file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the file type is supported, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.extract_text">
+<span class="sig-name descname"><span class="pre">extract_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.extract_text" title="Link to this definition"></a></dt>
+<dd><p>Extract text from a supported file type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – Path to the file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Extracted text as a single string. Returns empty string on error.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.split_text">
+<span class="sig-name descname"><span class="pre">split_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#LocalSearch.backend.text_extractor.DefaultTextExtractor.DefaultTextExtractor.split_text" title="Link to this definition"></a></dt>
+<dd><p>Split text into chunks with optional overlap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – Full text to split.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of text chunks.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="engine">
+<h2>Engine<a class="headerlink" href="#engine" title="Link to this heading"></a></h2>
+<p>This class provides the main interface for searching documents and querying LLMs.
+Use <a class="reference internal" href="#LocalSearch.backend.engine.SearchEngine" title="LocalSearch.backend.engine.SearchEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalSearch.backend.engine.SearchEngine</span></code></a> to initialize and run searches or start the web interface.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="LocalSearch.backend.engine.SearchEngine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">LocalSearch.backend.engine.</span></span><span class="sig-name descname"><span class="pre">SearchEngine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#LocalSearch.backend.llms.BaseLLM.BaseLLM" title="LocalSearch.backend.llms.BaseLLM.BaseLLM"><span class="pre">BaseLLM</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder" title="LocalSearch.backend.embeddings.BaseEmbeddings.BaseEmbedder"><span class="pre">BaseEmbedder</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_file_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['.txt',</span> <span class="pre">'.pdf',</span> <span class="pre">'.html']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metadata_store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore" title="LocalSearch.backend.metadata_store.BaseMetaDataStore.BaseMetadataStore"><span class="pre">BaseMetadataStore</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_store</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore" title="LocalSearch.backend.vector_store.BaseVectorStore.BaseVectorStore"><span class="pre">BaseVectorStore</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extractor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor" title="LocalSearch.backend.text_extractor.BaseTextExtractor.BaseTextExtractor"><span class="pre">BaseTextExtractor</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reembed_policy</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'modified_only'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recursive</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.engine.SearchEngine" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Local semantic search engine that wraps file embeddings, metadata,
+vector store, text extraction, and LLM-based query.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.engine.SearchEngine.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#LocalSearch.backend.engine.SearchEngine.search" title="Link to this definition"></a></dt>
+<dd><p>Perform semantic search and return LLM-generated answer using only relevant context.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LocalSearch.backend.engine.SearchEngine.web">
+<span class="sig-name descname"><span class="pre">web</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LocalSearch.backend.engine.SearchEngine.web" title="Link to this definition"></a></dt>
+<dd><p>Serve the local frontend with FastAPI and static files.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage / Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Advanced Usage / Custom Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
