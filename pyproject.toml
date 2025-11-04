@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "LocalSearch"
-version = "0.0.0"
+version = "0.0.1"
 description = "Local AI search engine for folders with a web interface"
 authors = [
     { name = "Rick Sanchez" }
