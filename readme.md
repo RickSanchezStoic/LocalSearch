@@ -27,7 +27,7 @@ pip install localsearch
 Or, if you’re developing locally:
 
 ``` bash
-git clone https://github.com/yourusername/LocalSearch.git
+git clone https://github.com/ricksanchezstoic/LocalSearch.git
 cd LocalSearch
 pip install -e .
 ```
