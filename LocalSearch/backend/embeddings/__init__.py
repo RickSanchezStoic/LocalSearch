@@ -1,2 +1,3 @@
 from .BaseEmbeddings import BaseEmbedder
 from .SentenceTransformerEmbedder import SentenceTransformerEmbedder
+from .OpenAIEmbedder import OpenAIAPIEmbedder
