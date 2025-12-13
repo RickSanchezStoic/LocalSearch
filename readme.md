@@ -29,7 +29,9 @@ Or, if you’re developing locally:
 ``` bash
 git clone https://github.com/ricksanchezstoic/LocalSearch.git
 cd LocalSearch
-pip install -e .
+uv python pin 3.12
+uv pip install -r requirements.txt
+uv pip install -e .
 ```
 
 ---
